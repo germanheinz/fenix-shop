@@ -1,11 +1,16 @@
-import { geist, geist_Mono } from "@/config/fonts";
-import Image from "next/image";
+import { ProductGrid, Title } from "@/components";
+import { initialData } from "@/seed/seed";
+// import { geist, geist_Mono } from "@/config/fonts";
+// import Image from "next/image";
+
+const products = initialData.products;
 
 export default function Home() {
   return (
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className={ geist.variable}>Hola Mundo!</h1>
-        <h1 className={ geist_Mono.variable}>Hola Mundo!</h1>
-      </main>
+      <>
+        <Title title="Store" subtitle="All Products" className="mb-2"/>
+
+        <ProductGrid products={ products }/>
+      </>
   );
 }
