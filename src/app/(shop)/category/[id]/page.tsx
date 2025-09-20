@@ -30,7 +30,7 @@ export default function({ params }: Props) {
   return (
     <>
 
-      <Title className='mb-2' title={`Items for ${ labels[id] }` } subtitle="test"/>
+      <Title className='mb-2' title={`Items for ${ labels[id as Category] }` } subtitle="test"/>
 
       <ProductGrid products={ product }/>
     </>
