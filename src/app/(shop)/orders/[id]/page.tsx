@@ -17,8 +17,7 @@ import { IoCartOutline } from 'react-icons/io5';
     };
   }
 
-// eslint-disable-next-line import/no-anonymous-default-export, react/display-name
-export default function({ params } :Props) {
+export default function OrderByIdPage({ params } :Props) {
 
   const { id } = params
 

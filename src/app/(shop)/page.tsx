@@ -1,16 +1,31 @@
-import { ProductGrid, Title } from "@/components";
-import { initialData } from "@/seed/seed";
+export const revalidate = 60;
+
+import { getPaginatedProductWithImages } from "@/actions";
+import { ProductGrid, Title, Pagination } from "@/components";
+import { redirect } from "next/navigation";
 // import { geist, geist_Mono } from "@/config/fonts";
 // import Image from "next/image";
 
-const products = initialData.products;
 
-export default function Home() {
+export default async function Home() {
+
+
+  const { products, currentPage, totalPages } = await getPaginatedProductWithImages({ page: 1, take: 12 });
+
+
+
+
+  if( products.length === 0 ){
+    redirect('/');
+  }
+
   return (
       <>
         <Title title="Store" subtitle="All Products" className="mb-2"/>
 
         <ProductGrid products={ products }/>
+
+        <Pagination totalPages={ totalPages }/>
       </>
   );
 }

@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { Category, initialData } from "@/seed/seed";
 import { ProductGrid } from '../../../../components/products/product-grid/ProductGrid';
 import { Title } from "@/components";
@@ -10,8 +12,7 @@ interface Props {
 
 const products = initialData.products;
 
-// eslint-disable-next-line import/no-anonymous-default-export, react/display-name
-export default function({ params }: Props) {
+export default function CategoryByIdPage({ params }: Props) {
 
   const { id } = params;
 

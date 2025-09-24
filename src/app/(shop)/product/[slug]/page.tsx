@@ -1,7 +1,9 @@
-import { ProductMobileSlideShow, ProductSlideShow, QuantitySelector, SizeSelector } from "@/components";
-import { geist_Mono } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
+export const revalidate = 10080;
 
+import { getProductBySlug } from "@/actions";
+import { ProductMobileSlideShow, ProductSlideShow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
+import { geist_Mono } from "@/config/fonts";
+import { Metadata, ResolvingMetadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 interface Props {
   params: {
@@ -9,12 +11,31 @@ interface Props {
   }
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export, react/display-name
-export default function({ params }: Props) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = (await params).slug
+ 
+  // fetch post information
+  const product = await getProductBySlug(slug);
+ 
+  return {
+    title: product?.title ?? 'Product not found',
+    description: product?.description ?? '',
+    openGraph: {
+      title: product?.title,
+      description: product?.description ?? '',
+      images: [ `/products/${ product?.images[1] }` ],
+    }
+  }
+}
 
-  const { slug } = params;
+export default async function ProductBySlugPage({ params }: Props) {
 
-  const product = initialData.products.find( product => product.slug === slug)
+  const { slug } =  await params;
+  
+  const product = await getProductBySlug( slug );
 
   if(!product) return; 
 
@@ -36,6 +57,8 @@ export default function({ params }: Props) {
 
       <div className="col-span-1 px-5 ">
        
+        <StockLabel slug={ product.slug } />
+
         <h1 className={`${geist_Mono} antialiased font-bold text-xl`}>{product?.title}</h1>
        
         <p className="text-lg mb-5">{product?.price}</p>
