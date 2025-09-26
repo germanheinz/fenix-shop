@@ -3,8 +3,6 @@ export const revalidate = 60;
 import { getPaginatedProductWithImages } from "@/actions";
 import { ProductGrid, Title, Pagination } from "@/components";
 import { redirect } from "next/navigation";
-// import { geist, geist_Mono } from "@/config/fonts";
-// import Image from "next/image";
 
 
 export default async function Home() {

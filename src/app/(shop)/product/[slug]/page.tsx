@@ -1,9 +1,10 @@
 export const revalidate = 10080;
 
 import { getProductBySlug } from "@/actions";
-import { ProductMobileSlideShow, ProductSlideShow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
+import { ProductMobileSlideShow, ProductSlideShow, StockLabel } from "@/components";
 import { geist_Mono } from "@/config/fonts";
 import { Metadata, ResolvingMetadata } from "next/dist/lib/metadata/types/metadata-interface";
+import { AddToCart } from './ui/AddToCart';
 
 interface Props {
   params: {
@@ -64,16 +65,7 @@ export default async function ProductBySlugPage({ params }: Props) {
         <p className="text-lg mb-5">{product?.price}</p>
 
 
-        {/* selector tallas */}
-
-        <SizeSelector 
-          selectedSize   = { product.sizes[0] } 
-          availableSizes = { product.sizes    } 
-        />
-        
-        <QuantitySelector quantity={1}/>
-
-        <button className="btn-primary my-5">Add to Cart</button>
+        <AddToCart product={product}/>
 
         <h3 className="font-bold text-sm">Description</h3>
         

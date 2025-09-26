@@ -3,7 +3,7 @@ import { Title } from '../../../components/ui/title/Title';
 import { initialData } from '@/seed/seed';
 import Image from 'next/image';
 import { QuantitySelector } from '@/components';
-import { redirect } from 'next/navigation';
+import { ProductsInCart } from './ui/ProductsInCart';
 
   const productInCart = [
     initialData.products[0],
@@ -31,32 +31,9 @@ export default function CartPage() {
         
 
             {/* items */}
-            { productInCart.map(product => (
-                <div key={product.slug} className='flex mb-5'>
-                  <Image 
-                    src={`/products/${product.images[0]}`}
-                    width={ 100 }
-                    height={ 100 }
-                    style={{
-                      width: '100px',
-                      height: '100px'
-                    }}
-                    alt={ product.title }
-                    className='mr-5 rounded'
-                  />
-  
-                <div>
-                  <p> { product.title }</p>
-                  <p>$ { product.price }</p>
-                  <QuantitySelector quantity={ 3 }/>
-
-                  <button className='underline mt-3'> Remove </button>
-                </div>
-                </div>
-                
-              ))
-            }
-
+            
+            <ProductsInCart />
+            
             </div>
 
 

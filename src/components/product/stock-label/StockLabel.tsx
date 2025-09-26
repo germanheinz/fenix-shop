@@ -29,8 +29,6 @@ export const StockLabel = ({ slug }: Props) => {
 
       setstock( stock );
       setIsLoading( false );
-
-      console.log('fetch stock for!!!!!!', stock)
   }
   
   return (
