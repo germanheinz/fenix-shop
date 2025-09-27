@@ -4,6 +4,7 @@ import { initialData } from '@/seed/seed';
 import Image from 'next/image';
 import { QuantitySelector } from '@/components';
 import { ProductsInCart } from './ui/ProductsInCart';
+import { OrderSummary } from './ui/OrderSummary';
 
   const productInCart = [
     initialData.products[0],
@@ -39,24 +40,7 @@ export default function CartPage() {
 
             {/* checkout */}
 
-            <div className='bg-white rounded-xl shadow-xl p-7 h-fit '>
-              <h2 className='grid grid-cols-2 font-bold '> Summary </h2>
-
-
-                <div className='grid grid-cols-2'>
-                  <span>No Products</span>
-                  <span className='text-right'>3 Products</span>
-
-                  <span>Subtotal</span>
-                  <span className='text-right'>$ 100</span>
-
-                  <span >Taxes (15%)</span>
-                  <span className='text-right'>%5</span>
-
-                  <span className='mt-5 text-2xl'>Total</span>
-                  <span className='mt-5 text-2xl text-right'>$ 100</span>
-    
-                </div>
+                <OrderSummary/>
 
 
                 <div className='mt-5 mb-2 w-full'>
@@ -71,6 +55,5 @@ export default function CartPage() {
         </div>
 
       </div>
-    </div>
   );
 }

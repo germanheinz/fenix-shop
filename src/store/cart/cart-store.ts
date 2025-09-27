@@ -5,7 +5,14 @@ import { create } from "zustand/react";
 interface State {
     cart: CartProduct[],
 
-    getTotalItems:    () => number;
+    getTotalItems: () => number;
+    getSummaryInformation: () => {
+      subsTotal: number;
+      tax: number;
+      total: number;
+      itemInCart: number;
+    };
+    
     addProductToCart: ( product: CartProduct ) => void;
     updateProductQuantity: ( product: CartProduct, quantity: number ) => void;
     removeProductFromCart: ( product: CartProduct ) => void;
@@ -21,6 +28,21 @@ export const useCartStore = create<State>()(
       getTotalItems: () => {
         const { cart } = get();
         return cart.reduce((total, product) => total + product.quantity, 0);
+      },
+      getSummaryInformation: () => {
+        const { cart } = get();
+
+        const subsTotal = cart.reduce((subTotal, product) => ( product.price * product.quantity ) + subTotal, 0);
+        const tax = subsTotal * 0.15;
+        const total = subsTotal + tax;
+        const itemInCart = cart.reduce((total, item) => total + item.quantity, 0);
+
+        return {
+          subsTotal,
+          tax,
+          total,
+          itemInCart
+        };
       },
 
       addProductToCart: (product: CartProduct) => {
