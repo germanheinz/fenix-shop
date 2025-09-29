@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { geist, geist_Mono } from "@/config/fonts";
 
 import "./globals.css";
+import { Provider } from "@/components";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${geist_Mono.variable} antialiased`}
       >
-        {children}
+        <Provider>
+          {children}
+        </Provider>
       </body>
     </html>
   );

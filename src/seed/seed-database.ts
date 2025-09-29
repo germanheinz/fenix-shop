@@ -6,13 +6,14 @@ import prisma  from "../lib/prisma.js";
 async function main() {
  
   await Promise.all([
-    prisma.productImage.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
+    await prisma.user.deleteMany(),
+    await prisma.productImage.deleteMany(),
+    await prisma.product.deleteMany(),
+    await prisma.category.deleteMany(),
   ]);
   console.log("Deleted database");
 
-  const { categories, products } = initialData;
+  const { categories, products, users } = initialData;
 
   const categoriesData = categories.map( (name) => ({ name }));
   console.log(categoriesData);
@@ -20,6 +21,8 @@ async function main() {
   await prisma.category.createMany({ data: categoriesData });
   console.log("Seeded Categories!");
 
+  await prisma.user.createMany({ data: users });
+  console.log("Seeded Users!");
 
   // CATEGORIES
 

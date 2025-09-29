@@ -14,9 +14,6 @@ export const ProductGridItem = ({ product }: Props) => {
 
    const [displayImage, setDisplayImage] = useState( product.images[0] )
 
-    console.log({ displayImage });
-    console.log({ product });
-
   return (
     <div className='rounded-md overflow-hidden fade-in'>
         <Link href={ `/product/${product.slug}`}>
