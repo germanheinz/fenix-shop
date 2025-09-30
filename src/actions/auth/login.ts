@@ -1,6 +1,7 @@
 'use server';
 
 import { signIn } from "@/auth.config";
+import { sign } from "crypto";
 
 export async function authenticate (
   prevState: string | undefined, 
@@ -21,6 +22,23 @@ export async function authenticate (
 
       return "CredentialsSignIn";
     }
+
+  }
+
+
+  export const login = async(email: string, password: string) => {
+    try {
+      await signIn('credentials', { email, password })
+
+      return { ok: true };
+    } catch (error) {
+      console.log(error);
+      return {
+        ok: false,
+        message: 'Could not Log in'
+      }
+    }
+
 
   }
   

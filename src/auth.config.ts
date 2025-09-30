@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import z from "zod";
+import { z } from "zod";
 import prisma from "./lib/prisma";
 import bcrypt from "bcryptjs";
 
@@ -8,6 +8,19 @@ export const authConfig = {
     path: {
         signIn: '/auth/login',
         signUp: '/auth/register',
+    },
+    callbacks: {
+      jwt({ token, user}){
+        if( user ){
+          token.data = user;
+        }
+        return token;
+      },
+      session({ session, token, user}){
+        console.log({session, token, user})
+        session.user = token.data as any;
+        return session;
+      },
     },
     providers: [
     Credentials({

@@ -7,17 +7,17 @@ import { authenticate } from '@/actions';
 import { IoInformationOutline } from 'react-icons/io5';
 import { useFormStatus } from 'react-dom';
 import clsx from 'clsx';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export const LoginForm = () => {
 
   const [ state, dispatch] = useActionState(authenticate, undefined);
 
+  const router = useRouter();
+
   useEffect(() => {
-    if(state === 'Success') { router.replace('/') }
-
-
-  }, [state])
+    if(state === 'Success') { window.location.replace('/')}
+  }, [state, router])
   
 
   return (
