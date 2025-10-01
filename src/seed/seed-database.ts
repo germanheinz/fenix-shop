@@ -1,15 +1,19 @@
 import { initialData } from "./seed.js";
 
 import prisma  from "../lib/prisma.js";
+import { countries } from "./seed-country.js";
 
  
 async function main() {
  
   await Promise.all([
+
+    await prisma.userAddress.deleteMany(),
     await prisma.user.deleteMany(),
+    await prisma.country.deleteMany(),
     await prisma.productImage.deleteMany(),
     await prisma.product.deleteMany(),
-    await prisma.category.deleteMany(),
+    await prisma.category.deleteMany()
   ]);
   console.log("Deleted database");
 
@@ -23,6 +27,11 @@ async function main() {
 
   await prisma.user.createMany({ data: users });
   console.log("Seeded Users!");
+
+  // COUNTRIES    
+  await prisma.country.createMany({ data: countries });
+  console.log("Seeded Countries!");
+
 
   // CATEGORIES
 
