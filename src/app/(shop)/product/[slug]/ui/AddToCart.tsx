@@ -28,7 +28,7 @@ export const AddToCart = ({ product }: Props) => {
 
 
         const cartProduct: CartProduct = {
-            id: product.slug,
+            id: product.id ?? '',
             slug: product.slug,
             title: product.title,
             price: product.price,

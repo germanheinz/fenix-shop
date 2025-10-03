@@ -17,7 +17,6 @@ export const authConfig = {
         return token;
       },
       session({ session, token, user}){
-        console.log({session, token, user})
         session.user = token.data as any;
         return session;
       },
@@ -39,12 +38,10 @@ export const authConfig = {
 
         if (!user) return null;
 
-        console.log("Authenticated User:", user);
-        
+      
         if (!bcrypt.compareSync(password, user.password)) return null;
         
-        console.log("PASO AUTHENTICACION &&&&&&&&");
-      
+    
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user;
 

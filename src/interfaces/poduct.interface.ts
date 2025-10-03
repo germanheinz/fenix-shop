@@ -2,7 +2,7 @@ import { Size } from "@/seed/seed";
 import { RandomUUIDOptions, UUID } from "crypto";
 
 export interface Product {
-    id?: RandomUUIDOptions | UUID | string;
+    id?: string;
     description: string;
     images: string[];
     inStock: number;
