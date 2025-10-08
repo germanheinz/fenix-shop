@@ -11,7 +11,6 @@ interface Props {
 
 export const Provider = ({ children }: Props) => {
 
-  console.log(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID);
   return (
       <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
         intent: 'capture',

@@ -1,10 +1,9 @@
 import { Size } from "@/seed/seed";
-import { RandomUUIDOptions, UUID } from "crypto";
 
 export interface Product {
-    id?: string;
+    id: string;
     description: string;
-    images: string[];
+    images?: string[];
     inStock: number;
     price: number;
     sizes: ValidSizes[];
@@ -24,6 +23,12 @@ export interface CartProduct {
     quantity: number;
     size: Size
     image: string;
+}
+
+export interface ProductImage{
+    id: number;
+    url: string;
+    productId: string;
 }
 
 export type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';

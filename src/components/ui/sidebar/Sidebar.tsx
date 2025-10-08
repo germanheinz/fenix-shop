@@ -104,15 +104,15 @@ export const Sidebar = () => {
         { 
             isAdmin && (
             <>
-                <Link href="/" className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                <Link href="/admin/products" onClick={() => closeSideMenu() } className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
                     <IoShirtOutline size={30} />
                     <span className='ml-3 text-xl'>Products</span>
                 </Link>\
-                <Link href="/" className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                <Link href="/admin/orders" onClick={() => closeSideMenu() } className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
                     <IoTicketOutline size={30} />
                     <span className='ml-3 text-xl'>Orders</span>
                 </Link>
-                <Link href="/" className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
+                <Link href="/admin/users" onClick={() => closeSideMenu() } className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'>
                     <IoPeopleOutline size={30} />
                     <span className='ml-3 text-xl'>Users</span>
                 </Link>

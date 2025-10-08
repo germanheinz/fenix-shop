@@ -1,16 +1,7 @@
 import Link from 'next/link';
 import { Title } from '../../../components/ui/title/Title';
-import { initialData } from '@/seed/seed';
-import Image from 'next/image';
-import { QuantitySelector } from '@/components';
 import { ProductsInCart } from './ui/ProductsInCart';
 import { OrderSummary } from './ui/OrderSummary';
-
-  const productInCart = [
-    initialData.products[0],
-    initialData.products[1],
-    initialData.products[2]
-  ]
 
 export default function CartPage() {
 

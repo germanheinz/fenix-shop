@@ -10,7 +10,7 @@ interface PaginationOptions {
 
 export const getPaginatedProductWithImages = async({
     page = 1,
-    take = 12
+    take = 6
 }: PaginationOptions) => {
 
 

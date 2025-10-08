@@ -1,14 +1,13 @@
 'use server';
 
-
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma";
 
-export const getOrderByUserId = async() => {
+export const getPaginatedOrders = async() => {
 
     const session = await auth();
 
-    if(!session?.user){
+    if(session?.user.role !== 'admin'){
         return{
             ok: false,
             message: 'Should be Authenticated'
@@ -16,7 +15,9 @@ export const getOrderByUserId = async() => {
     }
 
     const orders = await prisma.order.findMany({
-
+        orderBy:{
+            createdAt: 'desc'
+        },
         where:{
             userId: session.user.id
         },
