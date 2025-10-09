@@ -10,7 +10,6 @@ export const TopMenu = () => {
 
     
   const openSideMenu     = useUIStore( state => state.openSideMenu)
-  const closeSideMenu    = useUIStore( state => state.closeSideMenu)
   
   const totalItemsInCart = useCartStore( state => state.getTotalItems());
 

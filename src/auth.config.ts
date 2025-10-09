@@ -1,15 +1,19 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 import { z } from "zod";
 import prisma from "./lib/prisma";
-import bcrypt from "bcryptjs";
 
-export const authConfig = {
-    path: {
+export const authConfig: NextAuthConfig = {
+    pages: {
         signIn: '/auth/login',
-        signUp: '/auth/register',
+        newUser: '/auth/register',
     },
     callbacks: {
+      authorized({ auth, request: { nextUrl }}){
+        console.log({auth});
+        return true;
+      },
       jwt({ token, user}){
         if( user ){
           token.data = user;
@@ -42,7 +46,6 @@ export const authConfig = {
         if (!bcrypt.compareSync(password, user.password)) return null;
         
     
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user;
 
         return rest;

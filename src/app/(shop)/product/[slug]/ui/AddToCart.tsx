@@ -20,8 +20,6 @@ export const AddToCart = ({ product }: Props) => {
     const [posted, setposted]     = useState(false);
 
     const addToCart = () => {
-        console.log('$');
-
         setposted(true);
 
         if( !size ) return;
@@ -50,7 +48,7 @@ export const AddToCart = ({ product }: Props) => {
     return (
         <>
         {
-            posted && ! size && (
+            posted && !size && (
                 <span className='mt-2 text-red-500 fade-in'>
                     Please select a size 
                 </span>

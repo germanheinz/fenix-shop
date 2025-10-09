@@ -49,7 +49,7 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
 
     const { handleSubmit, register, formState: { isValid }, reset } = useForm<FormInputs >({
         defaultValues:{
-            ...(userStoredAddress as any),
+            ...(userStoredAddress as Address),
             rememberAddress: false
         }
     });

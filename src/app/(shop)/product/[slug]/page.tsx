@@ -5,6 +5,7 @@ import { ProductMobileSlideShow, ProductSlideShow, StockLabel } from "@/componen
 import { geist_Mono } from "@/config/fonts";
 import { Metadata, ResolvingMetadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { AddToCart } from './ui/AddToCart';
+import { notFound } from "next/navigation";
 
 interface Props {
   params: {
@@ -18,14 +19,13 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const slug = (await params).slug
  
-  // fetch post information
   const product = await getProductBySlug(slug);
  
   return {
     title: product?.title ?? 'Product not found',
     description: product?.description ?? '',
     openGraph: {
-      title: product?.title,
+      title: product?.title ?? 'Product not found',
       description: product?.description ?? '',
       images: [ `/products/${ product?.images[1] }` ],
     }
@@ -38,7 +38,7 @@ export default async function ProductBySlugPage({ params }: Props) {
   
   const product = await getProductBySlug( slug );
 
-  if(!product) return; 
+  if(!product) notFound(); 
 
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -60,16 +60,16 @@ export default async function ProductBySlugPage({ params }: Props) {
        
         <StockLabel slug={ product.slug } />
 
-        <h1 className={`${geist_Mono} antialiased font-bold text-xl`}>{product?.title}</h1>
+        <h1 className={`${geist_Mono} antialiased font-bold text-xl`}>{product.title}</h1>
        
-        <p className="text-lg mb-5">{product?.price}</p>
+        <p className="text-lg mb-5">{product.price}</p>
 
 
         <AddToCart product={product}/>
 
         <h3 className="font-bold text-sm">Description</h3>
         
-        <p className="font-light">{ product?.description }</p>
+        <p className="font-light">{ product.description }</p>
       </div>
 
 

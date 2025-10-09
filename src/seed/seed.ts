@@ -1,5 +1,3 @@
-import { email } from 'zod';
-import { ValidTypes } from '../interfaces/product.interface';
 import bcrypt from 'bcryptjs';
 
 interface SeedProduct {
@@ -23,12 +21,12 @@ interface SeedUser {
     role: 'admin'|'user';
 }
 
-type Category = 'men'|'women'|'kid'|'unisex'
+export type Category = 'men'|'women'|'kid'|'unisex'
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 export type Type = 'shirts'|'pants'|'hoodies'|'hats';
 
 interface SeedData {
-    categories: ValidTypes[];
+    categories: string[];
     products: SeedProduct[],
     users: SeedUser[]
 }

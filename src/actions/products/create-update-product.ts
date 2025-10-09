@@ -1,8 +1,7 @@
 'use server';
 
-import { Product } from '@/interfaces';
 import prisma from '@/lib/prisma';
-import { Gender, Size } from '@prisma/client';
+import { Gender, Product, Size } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 

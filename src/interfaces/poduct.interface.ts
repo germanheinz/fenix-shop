@@ -3,7 +3,7 @@ import { Size } from "@/seed/seed";
 export interface Product {
     id: string;
     description: string;
-    images?: string[];
+    images: string[];
     inStock: number;
     price: number;
     sizes: ValidSizes[];
@@ -21,7 +21,7 @@ export interface CartProduct {
     title: string;
     price: number;
     quantity: number;
-    size: Size
+    size: Size;
     image: string;
 }
 

@@ -43,7 +43,7 @@ export const UserTable = ({ users }: Props) => {
                   { user.role }
                 </td>
                 <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <select className="text-sm text-gray-900" value={user.role} onChange={e => changeUserRole(user.id, user.role)} id="">
+                    <select className="text-sm text-gray-900" value={user.role} onChange={_e => changeUserRole(user.id, user.role)} id="">
                         <option value="admin">Admin</option>    
                         <option value="user">User</option>    
                     </select> 

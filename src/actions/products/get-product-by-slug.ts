@@ -10,9 +10,9 @@ export const getProductBySlug = async( slug: string ) => {
             ProductImage: true
         },
         where: { 
-            slug: slug 
-        },
-    });
+            slug: slug,
+        }
+    })
     
     if(!product) return null;
 
