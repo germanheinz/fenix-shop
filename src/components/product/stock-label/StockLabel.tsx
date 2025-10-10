@@ -2,8 +2,8 @@
 
 
 import { useEffect, useState } from 'react'
-import { geist_Mono } from "@/config/fonts";
 import { getStockBySlug } from '@/actions';
+import { fontMono } from '@/config/fonts';
 
 
 interface Props{
@@ -23,16 +23,19 @@ export const StockLabel = ({ slug }: Props) => {
 
   
   const getStock = async() => {
+    
 
       // server action
       const stock = await getStockBySlug( slug );
 
+
       setstock( stock );
       setIsLoading( false );
-  }
+      console.log(isLoading);
+    }
   
   return (
-    <h1 className={ `${ geist_Mono } antialiased font-bold text-xl`}>
+    <h1 className={ `${ fontMono } antialiased font-bold text-xl`}>
 
         Stock: { stock }
 

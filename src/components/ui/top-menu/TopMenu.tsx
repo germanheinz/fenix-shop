@@ -1,6 +1,6 @@
 'use client'
 
-import { geist_Mono } from "@/config/fonts"
+import { fontMono } from "@/config/fonts";
 import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
@@ -22,7 +22,7 @@ export const TopMenu = () => {
   return (
     <nav className="flex px-5 justify-between items-center w-full">
         <div> 
-            <Link href="/"> <span className={ `${ geist_Mono.className} antialiased font-bold`}>Fénix</span> </Link>
+            <Link href="/"> <span className={ `${ fontMono.className} antialiased font-bold`}>Fénix</span> </Link>
             <span> | Shop</span>
         </div>
 
