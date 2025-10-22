@@ -5,17 +5,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run prisma:deploy && next build",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
-    "seed": "tsx src/seed/seed-database.ts",
-    "prisma:deploy": "npx prisma migrate deploy && prisma generate"
+    "seed": "tsx src/seed/seed-database.ts"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^8.9.2",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.23.24",
     "next": "15.5.3",
     "next-auth": "^5.0.0-beta.29",
     "react": "19.1.0",
