@@ -4,7 +4,7 @@ import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import clsx from "clsx";
-import { redirect } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
@@ -23,6 +23,8 @@ export const PlaceOrder = () => {
     const clearCart = useCartStore(state => state.clearCart );
 
     const cart = useCartStore(state => state.cart);
+
+    const router = useRouter();
 
     useEffect(() => {
         setloaded(true);
@@ -50,9 +52,8 @@ export const PlaceOrder = () => {
         }
 
         clearCart();
-        redirect('/orders/' + resp.order!.id);
-
         setIsCreatingOrder(false);
+        router.push('/orders/' + resp.prismaTx?.order.id);
     }
 
 

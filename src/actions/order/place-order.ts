@@ -129,19 +129,22 @@ export const placeOrder = async( productId: ProductToOrder[], address: Address) 
             })
 
 
-            return{
-                order: order,
-                updatedProducts: [],
-                orderAddress: orderAddress
-            }
+          return {
+            order: {
+              id: order.id,
+              itemsInOrder: order.itemsInOrder,
+              subTotal: order.subTotal,
+              tax: order.tax,
+              total: order.total,
+              createdAt: order.createdAt.toISOString(),
+            },
+            orderAddress,
+          };
 
         });
         
-        return {
-            ok: true,
-            order: prismaTx.order,
-            prismaTx: prismaTx
-        }
+        
+    return { ok: true, prismaTx };
     } catch (error) {
         return {
             ok: false,

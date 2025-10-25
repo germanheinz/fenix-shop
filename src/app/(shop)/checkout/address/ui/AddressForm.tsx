@@ -30,15 +30,23 @@ interface Props {
 
 export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
 
-    const setAddress = useAddressStore(state => state.setAddress);
-    const address   = useAddressStore(state => state.address);
-
     const router = useRouter();
 
+    
+    
     const { data: session } = useSession({
         required: true,
     });
+    
+    const { handleSubmit, register, formState: { isValid }, reset } = useForm<FormInputs >({
+        defaultValues:{
+            ...(userStoredAddress as Address),
+            rememberAddress: false
+        }
+    });
 
+    const setAddress = useAddressStore(state => state.setAddress);
+    const address   = useAddressStore(state => state.address);
 
 
     useEffect(() => {
@@ -47,12 +55,6 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
     }, []);
     
 
-    const { handleSubmit, register, formState: { isValid }, reset } = useForm<FormInputs >({
-        defaultValues:{
-            ...(userStoredAddress as Address),
-            rememberAddress: false
-        }
-    });
 
 
     const onSubmit = async(data: FormInputs) => {
@@ -61,7 +63,7 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
         
         setAddress(restAddress);
 
-        if( data.rememberAddress ){
+        if( rememberAddress ){
 
             await setUserAddress(restAddress, session!.user.id)
         

@@ -1,7 +1,7 @@
 'use client'
 
 import { login, registerUser } from '@/actions';
-import { geist_Mono } from '@/config/fonts'
+import { fontMono } from '@/config/fonts';
 import clsx from 'clsx';
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -43,7 +43,7 @@ export const RegisterForm = () => {
   return (
       <div className="flex flex-col min-h-screen pt-32 sm:pt-52">
 
-      <h1 className={ `${ geist_Mono.className } text-4xl mb-5` }>Ingresar</h1>
+      <h1 className={ `${ fontMono.className } text-4xl mb-5` }>Ingresar</h1>
 
       <form onSubmit={ handleSubmit( onSubmit )} className="flex flex-col">
 
