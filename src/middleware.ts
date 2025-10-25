@@ -14,7 +14,7 @@ export async function middleware(request: Request) {
 
   if (!hasVisited) {
     await registerVisit({ ref });
-    // Setear cookie para evitar registrar más visitas
+
     response.headers.set('Set-Cookie', 'visited=1; Path=/; Max-Age=31536000');
   }
 

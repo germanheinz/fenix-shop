@@ -1,27 +1,27 @@
-export * from './products/product-pagination';
-export * from './products/get-product-by-slug';
-export * from './products/get-stock-by-slug';
-export * from './products/create-update-product';
-export * from './products/delete-product-image';
-export * from './products/find-products-by-slug';
+export { getPaginatedProductWithImages } from './products/product-pagination';
+export { getProductBySlug } from './products/get-product-by-slug';
+export { getStockBySlug } from './products/get-stock-by-slug';
+export { createUpdateProduct } from './products/create-update-product';
+export { deleteProductImage } from './products/delete-product-image';
+export { findProductsBySlug } from './products/find-products-by-slug';
 
-export * from './auth/login';
-export * from './auth/logout';
-export * from './auth/register';
+export { login, authenticate } from './auth/login';
+export { logout } from './auth/logout';
+export { registerUser } from './auth/register';
 
-export * from './country/getCountries';
-export * from './address/set-user-address';
-export * from './address/delete-user-address';
-export * from './address/get-user-address';
+export { getCountries } from './country/getCountries';
+export { setUserAddress } from './address/set-user-address';
+export { deleteUserAddress } from './address/delete-user-address';
+export { getUserAddress } from './address/get-user-address';
 
-export * from './order/place-order';
-export * from './order/get-order-by-id';
-export * from './order/get-paginated-orders';
+export { placeOrder } from './order/place-order';
+export { getOrderById } from './order/get-order-by-id';
+export { getPaginatedOrders } from './order/get-paginated-orders';
 
-export * from './payments/set-transaction-id';
-export * from './payments/paypal-check-payment';
+export { setTransactionId } from './payments/set-transaction-id';
+export { paypalCheckPayment } from './payments/paypal-check-payment';
 
-export * from './users/get-paginater-user';
-export * from './users/change-user-role';
+export { getPaginaterUser } from './users/get-paginater-user';
+export { changeUserRole } from './users/change-user-role';
 
-export * from './categories/getCategories';
+export { default as getCategories } from './categories/getCategories';

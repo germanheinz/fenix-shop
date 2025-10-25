@@ -1,4 +1,4 @@
-import { geist_Mono } from '@/config/fonts';
+import { robotoFont } from '@/config/fonts';
 import React from 'react'
 
 interface Props{
@@ -10,7 +10,7 @@ interface Props{
 export const Title = ({title, subtitle, className}: Props) => {
   return (
     <div className={`mt-3 ${className}`}>
-        <h1 className={`${ geist_Mono.className} antialiased text-4xl font-semibold my-10`}>
+        <h1 className={`${ robotoFont.className} antialiased text-4xl font-semibold my-10`}>
             {title}
         </h1>
         {

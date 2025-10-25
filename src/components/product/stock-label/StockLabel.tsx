@@ -2,7 +2,7 @@
 
 
 import { useEffect, useState } from 'react'
-import { geist_Mono } from "@/config/fonts";
+import { robotoFont } from "@/config/fonts";
 import { getStockBySlug } from '@/actions';
 
 
@@ -32,7 +32,7 @@ export const StockLabel = ({ slug }: Props) => {
   }
   
   return (
-    <h1 className={ `${ geist_Mono } antialiased font-bold text-xl`}>
+    <h1 className={ `${ robotoFont } antialiased font-bold text-xl`}>
 
         Stock: { stock }
 

@@ -1,12 +1,11 @@
 'use client'
-
-import { geist_Mono } from "@/config/fonts"
 import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { IoCartOutline } from "react-icons/io5";
 import ExpandableSearch from "../search/ExpandableSearch";
 import { useSearch } from "@/context/SearchContext";
+import { robotoFont } from "@/config/fonts";
 
 export const TopMenu = () => {
     const { setSearchResults } = useSearch();
@@ -25,7 +24,7 @@ export const TopMenu = () => {
   return (
     <nav className="flex px-5 justify-between items-center w-full">
         <div> 
-            <Link href="/"> <span className={ `${ geist_Mono.className} antialiased font-bold`}>Fénix</span> </Link>
+            <Link href="/"> <span className={ `${ robotoFont.className} antialiased font-bold`}>Fénix</span> </Link>
             <span> | Shop</span>
         </div>
 
