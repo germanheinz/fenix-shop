@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { IoSearchOutline } from "react-icons/io5";
 import { findProductsBySlug } from "@/actions";
 
-export default function ExpandableSearch({ onSearch }: { onSearch: (value: string) => void}) {
+export default function ExpandableSearch({ onSearchResults }: { onSearchResults?: (results: any[]) => void }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -30,10 +30,15 @@ export default function ExpandableSearch({ onSearch }: { onSearch: (value: strin
           value={query}
           placeholder="Type something..."
           className="flex-1 bg-transparent px-2 text-sm outline-none"
-          onChange={(e) => {
-            setQuery(e.target.value);
-            onSearch(e.target.value);
-            findProductsBySlug(e.target.value)
+          onChange={async (e) => {
+            const value = e.target.value;
+            setQuery(value);
+            if (value.length > 1) {
+              const res = await findProductsBySlug(value);
+              if (onSearchResults) onSearchResults(res || []);
+            } else {
+              if (onSearchResults) onSearchResults([]);
+            }
           }}
         />
       )}

@@ -6,8 +6,10 @@ import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { IoCartOutline } from "react-icons/io5";
 import ExpandableSearch from "../search/ExpandableSearch";
+import { useSearch } from "@/context/SearchContext";
 
 export const TopMenu = () => {
+    const { setSearchResults } = useSearch();
 
     
   const openSideMenu     = useUIStore( state => state.openSideMenu)
@@ -34,7 +36,7 @@ export const TopMenu = () => {
         </div>
 
         <div className="flex items-center">
-            <ExpandableSearch onSearch={(value) => console.log("Typed:", value)}/>
+            <ExpandableSearch onSearchResults={setSearchResults}/>
             <Link href={
                 ((totalItemsInCart === 0) && loaded) ? '/empty' : '/cart'
             } className="mx-2">
