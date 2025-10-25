@@ -1,23 +1,50 @@
-import { auth } from '@/auth.config'
-import { redirect } from 'next/navigation';
+"use client"
+
+import { Title } from '@/components';
 import React from 'react'
-import { Title } from '../../../components/ui/title/Title';
+import { Bar } from 'react-chartjs-2';
 
-export default async function ProfilePage() {
-   
-    const session = await auth();
-  
-    if(!session?.user){ redirect('/')}
-   
-    return (
-      <div>
+export default function ProfilePage() {
+  const [dataChart, setDataChart] = React.useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Visit by month',
+        data: [],
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+      },
+    ],
+  });
 
-        <Title title="Profile?" />
-        <pre> { JSON.stringify(session.user, null, 2)} </pre>
+  React.useEffect(() => {
+    fetch('/api/visit-counts')
+      .then(res => res.json())
+      .then(counts => {
+        const labels = Object.keys(counts).map(key => {
+          const [year, month] = key.split('-');
+          const meses = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+          ];
+          return `${meses[parseInt(month, 10) - 1]} ${year}`;
+        });
+        setDataChart({
+          labels,
+          datasets: [
+            {
+              label: 'Visitas por mes',
+              data: Object.values(counts),
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            },
+          ],
+        });
+      });
+  }, []);
 
-        <h3 className='text-3xl mb-10'>{ session.user.role }</h3>
-
-
-      </div>  
-    );
+  return (
+    <div>
+      <Title title="Profile" />
+      <Bar data={dataChart} />
+    </div>
+  );
 }
