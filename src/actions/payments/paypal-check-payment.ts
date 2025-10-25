@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidate } from "@/app/(shop)/page";
 import { PaypalSatusResponse } from "@/interfaces";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
