@@ -5,23 +5,27 @@ import prisma from "@/lib/prisma";
 export const findProductsBySlug = async( slug: string ) => {
   
   try{
-    const product = await prisma.product.findMany({
-        include: {
-            ProductImage: true
-        },
-        where: { 
-            slug: slug,
+    const products = await prisma.product.findMany({
+      include: {
+        ProductImage: true
+      },
+      where: {
+        description: {
+          contains: slug,
+          mode: 'insensitive'
         }
-    })
-    console.log(product);
-    
-    if(!product) return null;
+      },
+      take: 5
+    });
 
+    console.log('Productos encontrados:', products.length);
 
-    return { 
-        product,
-        images: product[0].ProductImage.map( img => img.url )
-    }
+    if (products.length === 0) return null;
+
+    return products.map(product => ({
+      ...product,
+      images: product.ProductImage ? product.ProductImage.map(img => img.url) : []
+    }));
 
 
 
