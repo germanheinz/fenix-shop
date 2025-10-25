@@ -24,13 +24,11 @@ export const PlaceOrder = () => {
 
     const cart = useCartStore(state => state.cart);
 
+    const router = useRouter();
+
     useEffect(() => {
         setloaded(true);
     }, []);
-
-
-    
-    const router = useRouter();
     
     const onCreatingOrder = async() => {
         setIsCreatingOrder(true);
@@ -51,9 +49,8 @@ export const PlaceOrder = () => {
         }
 
         clearCart();
-        router.push('/orders/' + resp.order!.id);
-
         setIsCreatingOrder(false);
+        router.push('/orders/' + resp.prismaTx?.order.id);
     }
 
 

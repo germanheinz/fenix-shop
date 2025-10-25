@@ -59,7 +59,7 @@ export default async function ProductBySlugPage({ params }: Props) {
        
         <StockLabel slug={ product.slug } />
 
-        <h1 className={`${robotoFont} antialiased font-bold text-xl`}>{product.title}</h1>
+        <h1 className={`${robotoFont.className} antialiased font-bold text-xl`}>{product.title}</h1>
        
         <p className="text-lg mb-5">{product.price}</p>
 

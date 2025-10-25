@@ -1,4 +1,4 @@
-import {  robotoFont } from '@/config/fonts';
+import { robotoFont } from '@/config/fonts';
 import { LoginForm } from './ui/LoginForm';
 
 export default function LoginPage() {

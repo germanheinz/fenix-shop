@@ -1,4 +1,4 @@
-import { robotoFont } from '@/config/fonts'
+import { robotoFont } from '@/config/fonts';
 import Link from 'next/link'
 import React from 'react'
 
@@ -8,7 +8,7 @@ export const Footer = () => {
 
       <Link href="/">
 
-      <span className={`${ robotoFont } antialiased font-bold`}> Fénix </span>
+      <span className={`${ robotoFont.className } antialiased font-bold`}> Fénix </span>
       <span> | shop</span>
       <span> { new Date().getFullYear( )}</span>
       

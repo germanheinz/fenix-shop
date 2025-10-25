@@ -1,7 +1,7 @@
 'use client'
 
 import { login, registerUser } from '@/actions';
-import { robotoFont } from '@/config/fonts'
+import { robotoFont } from '@/config/fonts';
 import clsx from 'clsx';
 import Link from 'next/link'
 import React, { useState } from 'react'

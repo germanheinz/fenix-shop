@@ -23,16 +23,19 @@ export const StockLabel = ({ slug }: Props) => {
 
   
   const getStock = async() => {
+    
 
       // server action
       const stock = await getStockBySlug( slug );
 
+
       setstock( stock );
       setIsLoading( false );
-  }
+      console.log(isLoading);
+    }
   
   return (
-    <h1 className={ `${ robotoFont } antialiased font-bold text-xl`}>
+    <h1 className={ `${ robotoFont.className } antialiased font-bold text-xl`}>
 
         Stock: { stock }
 

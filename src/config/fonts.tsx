@@ -1,6 +1,9 @@
-
 import { Inter, Roboto } from 'next/font/google';
 
+export const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const interFont = Inter({
   subsets: ['latin'],

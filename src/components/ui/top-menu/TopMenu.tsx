@@ -1,11 +1,11 @@
 'use client'
+import { robotoFont } from "@/config/fonts";
 import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { IoCartOutline } from "react-icons/io5";
 import ExpandableSearch from "../search/ExpandableSearch";
 import { useSearch } from "@/context/SearchContext";
-import { robotoFont } from "@/config/fonts";
 
 export const TopMenu = () => {
     const { setSearchResults } = useSearch();

@@ -33,7 +33,7 @@ export const useAddressStore = create<State>()(
             }
         }),
     {
-        name: 'addess-storage',
+        name: 'address-storage',
     }
     ), 
 )

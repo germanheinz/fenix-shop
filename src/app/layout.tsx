@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-
-
 import "./globals.css";
 import { Provider } from "@/components";
 import { interFont, robotoFont } from "@/config/fonts";
