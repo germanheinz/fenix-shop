@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, Suspense } from "react";
 import { getPaginatedProductWithImages } from "@/actions";
+import { registerVisit } from "@/actions/visit/register-visit";
 import { ProductGrid, Title, Pagination } from "@/components";
 import { Product } from "@/interfaces";
 import { useSearch } from "@/context/SearchContext";
@@ -16,21 +17,11 @@ export default function Home() {
       setProducts(products);
       setTotalPages(totalPages);
 
-      // Register visit if cookie is not set
-      if (!document.cookie.includes('visited=1')) {
-        try {
-          await fetch('/api/visits', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              ref: new URLSearchParams(window.location.search).get('ref') || '',
-            }),
-          });
-        } catch (error) {
-          console.error('Error registering visit:', error);
-        }
+      try {
+        const ref = new URLSearchParams(window.location.search).get('ref') || '';
+        await registerVisit({ ref });
+      } catch (error) {
+        console.error('Error registering visit:', error);
       }
     })();
   }, []);
