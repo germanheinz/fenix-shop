@@ -26,8 +26,17 @@ const meses = [
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
 
+interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string;
+  }[];
+}
+
 export default function ProfilePage() {
-  const [dataChart, setDataChart] = React.useState({
+  const [dataChart, setDataChart] = React.useState<ChartData>({
     labels: [],
     datasets: [
       {
@@ -45,7 +54,7 @@ export default function ProfilePage() {
       const values = JSON.parse(visitDataDiv.getAttribute('data-values') || '[]');
       
       // Convert dates to Spanish month names
-      const labels = rawLabels.map(key => {
+      const labels = (rawLabels as string[]).map((key: string) => {
         const [year, month] = key.split('-');
         return `${meses[parseInt(month, 10) - 1]} ${year}`;
       });
