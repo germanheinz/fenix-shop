@@ -2,6 +2,7 @@
 import { Title } from '@/components';
 import React from 'react'
 import { Bar } from 'react-chartjs-2';
+import { useSession } from 'next-auth/react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -36,6 +37,9 @@ interface ChartData {
 }
 
 export default function ProfilePage() {
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === 'admin';
+
   const [dataChart, setDataChart] = React.useState<ChartData>({
     labels: [],
     datasets: [
@@ -63,7 +67,7 @@ export default function ProfilePage() {
         labels,
         datasets: [
           {
-            label: 'Visitas por mes',
+            label: 'Visits by month',
             data: values,
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
           }
@@ -75,7 +79,18 @@ export default function ProfilePage() {
   return (
     <div>
       <Title title="Profile" />
-      <Bar data={dataChart} />
+      
+      {isAdmin ? (
+        <div>
+          <h2 className="text-2xl mb-4">Estadísticas de Visitas</h2>
+          <Bar data={dataChart} />
+        </div>
+      ) : (
+        <div className="text-center p-4">
+          <p>Welcome to Profile</p>
+          <p className="text-gray-600">This section is only visible for admin users</p>
+        </div>
+      )}
     </div>
   );
 }

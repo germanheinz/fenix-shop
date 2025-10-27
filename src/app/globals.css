@@ -25,6 +25,16 @@ body {
   100% { opacity: 1; }
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+}
+
 .fade-in {
   animation: fadeIn 0.5s both;
 }

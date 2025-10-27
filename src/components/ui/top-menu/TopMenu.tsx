@@ -2,6 +2,7 @@
 import { robotoFont } from "@/config/fonts";
 import { useCartStore, useUIStore } from "@/store";
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react"
 import { IoCartOutline } from "react-icons/io5";
 import ExpandableSearch from "../search/ExpandableSearch";
@@ -9,13 +10,13 @@ import { useSearch } from "@/context/SearchContext";
 
 export const TopMenu = () => {
     const { setSearchResults } = useSearch();
-
+    const pathname = usePathname();
     
-  const openSideMenu     = useUIStore( state => state.openSideMenu)
-  
-  const totalItemsInCart = useCartStore( state => state.getTotalItems());
-
-  const [loaded, setloaded] = useState( false);
+    const openSideMenu = useUIStore( state => state.openSideMenu);
+    const totalItemsInCart = useCartStore( state => state.getTotalItems());
+    
+    const [loaded, setloaded] = useState(false);
+    const isHomePage = pathname === '/';
 
   useEffect(() => {
     setloaded(true);
@@ -35,12 +36,13 @@ export const TopMenu = () => {
         </div>
 
         <div className="flex items-center">
-            <ExpandableSearch onSearchResults={setSearchResults}/>
+            {isHomePage && (
+              <ExpandableSearch onSearchResults={setSearchResults}/>
+            )}
             <Link href={
                 ((totalItemsInCart === 0) && loaded) ? '/empty' : '/cart'
             } className="mx-2">
                 <div className="relative">
-
                     { 
                        ( loaded && totalItemsInCart > 0 ) &&  (
                             <span className="fade-in absolute text-xs px-1 rounded-full font-bold -top-2 -right-2 bg-blue-700 text-white">
