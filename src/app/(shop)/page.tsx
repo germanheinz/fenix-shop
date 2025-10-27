@@ -15,6 +15,23 @@ export default function Home() {
       const { products, totalPages } = await getPaginatedProductWithImages({ page: 1 });
       setProducts(products);
       setTotalPages(totalPages);
+
+      // Register visit if cookie is not set
+      if (!document.cookie.includes('visited=1')) {
+        try {
+          await fetch('/api/visits', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ref: new URLSearchParams(window.location.search).get('ref') || '',
+            }),
+          });
+        } catch (error) {
+          console.error('Error registering visit:', error);
+        }
+      }
     })();
   }, []);
 
