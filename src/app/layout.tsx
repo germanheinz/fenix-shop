@@ -12,15 +12,15 @@ export const metadata: Metadata = {
   description: "Your premium fashion e-commerce experience",
   icons: {
     icon: [
-      // {
-        // url: '/favicon.ico',
-        // sizes: '32x32',
-        // type: 'image/x-icon',
-      // },
-      // {
-      //   url: '/icon.svg',
-      //   type: 'image/svg+xml',
-      // }
+      {
+        url: '/fenix.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      }
     ],
   },
 };

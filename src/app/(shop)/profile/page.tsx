@@ -82,7 +82,7 @@ export default function ProfilePage() {
       
       {isAdmin ? (
         <div>
-          <h2 className="text-2xl mb-4">Estadísticas de Visitas</h2>
+          <h2 className="text-2xl mb-4">Vists</h2>
           <Bar data={dataChart} />
         </div>
       ) : (
