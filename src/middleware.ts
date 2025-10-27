@@ -1,24 +1,31 @@
-
 import { NextResponse } from 'next/server';
-import { registerVisit } from '@/actions/visit/register-visit';
+import type { NextRequest } from 'next/server';
 
-export async function middleware(request: Request) {
-  const url = new URL(request.url);
-  const ref = url.searchParams.get('ref') || '';
+export async function middleware(request: NextRequest) {
+  try {
+    const response = NextResponse.next();
 
-  // Leer cookies
-  const cookie = request.headers.get('cookie') || '';
-  const hasVisited = cookie.includes('visited=1');
+    // Solo proceder si estamos en la página principal
+    if (request.nextUrl.pathname === '/') {
+      const cookie = request.cookies.get('visited');
+      
+      if (!cookie) {
+        // Set cookie but don't try to write to DB from middleware
+        response.cookies.set('visited', '1', {
+          path: '/',
+          maxAge: 31536000,
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        });
+      }
+    }
 
-  const response = NextResponse.next();
-
-  if (!hasVisited) {
-    await registerVisit({ ref });
-
-    response.headers.set('Set-Cookie', 'visited=1; Path=/; Max-Age=31536000');
+    return response;
+  } catch (error) {
+    // En caso de error, permitir que la solicitud continúe
+    console.error('Middleware error:', error);
+    return NextResponse.next();
   }
-
-  return response;
 }
 
 export const config = {
