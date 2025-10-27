@@ -2,8 +2,8 @@
 
 
 import { useEffect, useState } from 'react'
+import { robotoFont } from "@/config/fonts";
 import { getStockBySlug } from '@/actions';
-import { fontMono } from '@/config/fonts';
 
 
 interface Props{
@@ -35,7 +35,7 @@ export const StockLabel = ({ slug }: Props) => {
     }
   
   return (
-    <h1 className={ `${ fontMono } antialiased font-bold text-xl`}>
+    <h1 className={ `${ robotoFont.className } antialiased font-bold text-xl`}>
 
         Stock: { stock }
 

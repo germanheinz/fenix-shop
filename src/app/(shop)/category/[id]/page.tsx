@@ -36,17 +36,17 @@ export default async function CategoryByIdPage({ params, searchParams }: Props) 
   }
 
   const labels: Record<string, string> = {
-    'men': 'Men',
-    'women': 'Women',
-    'kid': 'Kids',
-    'unisex': 'Unisex'
+    'men': 'Men\'s Collection',
+    'women': 'Women\'s Collection',
+    'kid': 'Kids Collection',
+    'unisex': 'Unisex Collection'
   }
 
  
   return (
     <>
 
-      <Title className='mb-2' title={`Items for ${ labels[id] }` } subtitle="test"/>
+      <Title className='mb-2' title={`${ labels[id] }`} subtitle="Discover our latest styles"/>
 
       <ProductGrid products={ products }/>
 

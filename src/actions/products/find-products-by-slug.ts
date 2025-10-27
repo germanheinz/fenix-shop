@@ -1,6 +1,5 @@
 'use server';
-
-import prisma from "@/lib/prisma";
+import prisma  from "@/lib/prisma";
 
 export const findProductsBySlug = async( slug: string ) => {
   
@@ -32,6 +31,7 @@ export const findProductsBySlug = async( slug: string ) => {
   }catch( error ){
     console.log({ error });
     throw new Error('Error to find products');
-  }
+  
+}
   
 }

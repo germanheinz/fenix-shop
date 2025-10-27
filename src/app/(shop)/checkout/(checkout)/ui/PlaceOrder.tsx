@@ -4,7 +4,7 @@ import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 
@@ -29,12 +29,9 @@ export const PlaceOrder = () => {
     useEffect(() => {
         setloaded(true);
     }, []);
-
-
     
     const onCreatingOrder = async() => {
         setIsCreatingOrder(true);
-
 
         const productsToOrder = cart.map(product => ({
           productId: product.id,
