@@ -22,10 +22,10 @@ export async function getVisits(): Promise<VisitResponse> {
   try {
     const monthlyVisits = await prisma.$queryRaw<VisitCount[]>`
       SELECT 
-        to_char(DATE_TRUNC('month', "createdAt"), 'YYYY-MM') as month,
+        to_char("createdAt", 'YYYY-MM') as month,
         COUNT(*) as count
       FROM "Visit"
-      GROUP BY DATE_TRUNC('month', "createdAt")
+      GROUP BY to_char("createdAt", 'YYYY-MM')
       ORDER BY month DESC
     `;
 
