@@ -2,36 +2,50 @@
 
 import prisma from '@/lib/prisma';
 
-export async function getVisits() {
-  try {
-    // Obtener visitas agrupadas por mes directamente desde Prisma
-    const visits = await prisma.visit.groupBy({
-      by: ['createdAt'],
-      _count: {
-        id: true
-      },
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
+interface VisitCount {
+  month: string;
+  count: bigint;
+}
 
-    // Formatear los resultados para mantener la misma estructura de respuesta
-    const visitsData = visits.map((visit) => ({
-      month: visit.createdAt.toISOString().substring(0, 7),
-      _count: {
-        id: visit._count.id
+interface VisitResponse {
+  success: boolean;
+  visits?: Array<{
+    month: string;
+    _count: {
+      id: number;
+    };
+  }>;
+  error?: string;
+}
+
+export async function getVisits(): Promise<VisitResponse> {
+  try {
+    const monthlyVisits = await prisma.$queryRaw<VisitCount[]>`
+      SELECT 
+        to_char(DATE_TRUNC('month', "createdAt"), 'YYYY-MM') as month,
+        COUNT(*) as count
+      FROM "Visit"
+      GROUP BY DATE_TRUNC('month', "createdAt")
+      ORDER BY month DESC
+    `;
+
+    const formattedVisits = monthlyVisits.map(visit => ({
+      month: visit.month,
+      _count: { 
+        id: Number(visit.count) 
       }
     }));
 
     return {
       success: true,
-      visits: visitsData
+      visits: formattedVisits
     };
+
   } catch (error) {
     console.error('Error getting visits:', error);
     return {
       success: false,
-      error: 'Failed to get visits'
+      error: 'Error al obtener las visitas'
     };
   }
 }
