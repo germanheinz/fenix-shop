@@ -3,6 +3,7 @@ import { Title } from '@/components';
 import React from 'react'
 import { Bar } from 'react-chartjs-2';
 import { useSession } from 'next-auth/react';
+import { getVisits } from '@/actions/visit/get-visits';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,6 +27,13 @@ const meses = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
+
+interface Visit {
+  month: string;
+  _count: {
+    id: number;
+  };
+}
 
 interface ChartData {
   labels: string[];
@@ -52,28 +60,30 @@ export default function ProfilePage() {
   });
 
   React.useEffect(() => {
-    const visitDataDiv = document.getElementById('visit-data');
-    if (visitDataDiv) {
-      const rawLabels = JSON.parse(visitDataDiv.getAttribute('data-labels') || '[]');
-      const values = JSON.parse(visitDataDiv.getAttribute('data-values') || '[]');
-      
-      // Convert dates to Spanish month names
-      const labels = (rawLabels as string[]).map((key: string) => {
-        const [year, month] = key.split('-');
-        return `${meses[parseInt(month, 10) - 1]} ${year}`;
-      });
+    const loadVisits = async () => {
+      const visitsData = await getVisits();
+      if (visitsData.success && Array.isArray(visitsData.visits)) {
+        const monthlyVisits = visitsData.visits.sort((a: Visit, b: Visit) => a.month.localeCompare(b.month));
+        const labels = monthlyVisits.map((visit: Visit) => {
+          const [year, month] = visit.month.split('-');
+          return `${meses[parseInt(month) - 1]} ${year}`;
+        });
+        const values = monthlyVisits.map((visit: Visit) => visit._count.id);
 
-      setDataChart({
-        labels,
-        datasets: [
-          {
-            label: 'Visits by month',
-            data: values,
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-          }
-        ],
-      });
-    }
+        setDataChart({
+          labels,
+          datasets: [
+            {
+              label: 'Visitas por mes',
+              data: values,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            }
+          ],
+        });
+      }
+    };
+    
+    loadVisits();
   }, []);
 
   return (
