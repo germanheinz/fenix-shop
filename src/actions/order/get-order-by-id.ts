@@ -7,14 +7,13 @@ export const getOrderById = async(id: string) => {
 
     const session = await auth();
 
-    const userId = session?.user.id;
-
-    if( !userId ){
-        return { 
-            ok: false,
-            messsage: 'No User Session'
-        }
-    }
+    // const userId = session?.user.id;
+    // if( !userId ){
+    //     return { 
+    //         ok: false,
+    //         messsage: 'No User Session'
+    //     }
+    // }
 
     try {
         
@@ -53,12 +52,12 @@ export const getOrderById = async(id: string) => {
         if(!order) throw new Error('Order does not extis');
     
 
-        if(session.user.role === 'user'){
-            console.log('')
-            if(session.user.id !== order.id){
-                throw `${ id } no belong to the User`
-            }
-        }
+        // if(session.user.role === 'user'){
+        //     console.log('')
+        //     if(session.user.id !== order.id){
+        //         throw `${ id } no belong to the User`
+        //     }
+        // }
 
         return { 
             ok: true,
