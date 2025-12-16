@@ -2,12 +2,14 @@
 import { useEffect, useState, Suspense } from "react";
 import { getPaginatedProductWithImages } from "@/actions";
 import { registerVisit } from "@/actions/visit/register-visit";
-import { ProductGrid, Title, Pagination } from "@/components";
+import { ProductGrid, Title, Pagination, Chat } from "@/components";
 import { Product } from "@/interfaces";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPages, setTotalPages] = useState(1);
+
+  
 
   useEffect(() => {
     (async () => {
@@ -30,6 +32,7 @@ export default function Home() {
       <ProductGrid products={products} />
       <Suspense fallback={<div>Loading pagination...</div>}>
         <Pagination totalPages={totalPages} />
+        <Chat/>
       </Suspense>
     </>
   );

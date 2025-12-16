@@ -1,0 +1,6 @@
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
+
+createChat({
+	webhookUrl: 'https://heinzgerman.app.n8n.cloud/webhook/b85548fa-0d54-4078-aace-1c035ccd42f2/chat'
+});
