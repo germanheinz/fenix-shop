@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, Suspense } from "react";
+import { useSession } from 'next-auth/react';
 import { getPaginatedProductWithImages } from "@/actions";
 import { registerVisit } from "@/actions/visit/register-visit";
 import { ProductGrid, Title, Pagination, Chat } from "@/components";
@@ -8,6 +9,7 @@ import { Product } from "@/interfaces";
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPages, setTotalPages] = useState(1);
+  const { status } = useSession();
 
   
 
@@ -32,7 +34,7 @@ export default function Home() {
       <ProductGrid products={products} />
       <Suspense fallback={<div>Loading pagination...</div>}>
         <Pagination totalPages={totalPages} />
-        <Chat/>
+        {status === 'authenticated' && <Chat />}
       </Suspense>
     </>
   );

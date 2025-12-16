@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/auth.config';
 
 // Simple GET handler so the widget can probe the endpoint without failing.
 export async function GET() {
@@ -59,6 +60,11 @@ async function forwardPost(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const session = await auth();
+  const userId = (session as any)?.user?.id;
+  if (!userId) {
+    return NextResponse.json({ ok: false, message: 'Unauthorized' }, { status: 401 });
+  }
   return forwardPost(req);
 }
 
