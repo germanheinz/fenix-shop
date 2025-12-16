@@ -12,7 +12,7 @@ export const Chat = () => {
                 'Hi there! 👋',
                 'My name is Nathan. How can I assist you today?'
             ],
-			webhookUrl: 'https://heinzgerman.app.n8n.cloud/webhook//chat'
+			webhookUrl: '/api/n8n/chat'
 		});
 	}, []);
 
