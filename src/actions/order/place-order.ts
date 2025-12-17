@@ -146,9 +146,13 @@ export const placeOrder = async( productId: ProductToOrder[], address: Address) 
         
     return { ok: true, prismaTx };
     } catch (error) {
+        let message = 'Unknown error';
+        if (typeof error === 'string') message = error;
+        else if (error instanceof Error) message = error.message;
+        else if (error && typeof error === 'object' && 'message' in error) message = String((error as any).message);
         return {
             ok: false,
-            message: error
+            message
         };
     }
 
