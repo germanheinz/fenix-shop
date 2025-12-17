@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getPaginatedProductWithImages } from '@/actions';
+import prisma from '@/lib/prisma';
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const page = Number(searchParams.get('page') || 1);
-  const data = await getPaginatedProductWithImages({ page });
-  return NextResponse.json(data);
+export async function GET() {
+  const products = await prisma.product.findMany({
+    include: {
+      ProductImage: true
+    }
+  });
+  return NextResponse.json({ products });
 }
