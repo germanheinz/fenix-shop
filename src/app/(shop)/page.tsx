@@ -34,7 +34,7 @@ export default function Home() {
       <ProductGrid products={products} />
       <Suspense fallback={<div>Loading pagination...</div>}>
         <Pagination totalPages={totalPages} />
-        {status === 'authenticated' && <Chat />}
+        {/* {status === 'authenticated' && <Chat />} */}
         {status === 'authenticated' && <ChatVoiceAgent />}
       </Suspense>
     </>
