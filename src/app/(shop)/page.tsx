@@ -3,7 +3,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useSession } from 'next-auth/react';
 import { getPaginatedProductWithImages } from "@/actions";
 import { registerVisit } from "@/actions/visit/register-visit";
-import { ProductGrid, Title, Pagination, Chat } from "@/components";
+import { ProductGrid, Title, Pagination, ChatVoiceAgent, Chat } from "@/components";
 import { Product } from "@/interfaces";
 
 export default function Home() {
@@ -35,6 +35,7 @@ export default function Home() {
       <Suspense fallback={<div>Loading pagination...</div>}>
         <Pagination totalPages={totalPages} />
         {status === 'authenticated' && <Chat />}
+        {status === 'authenticated' && <ChatVoiceAgent />}
       </Suspense>
     </>
   );

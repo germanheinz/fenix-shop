@@ -23,5 +23,6 @@ export * from './product/product-image/ProductImage';
 export * from './ui/test-banner/TestBanner';
 
 export * from './chat/Chat';
+export * from './chat/ChatVoice';
 
 
